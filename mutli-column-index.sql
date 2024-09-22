@@ -11,15 +11,9 @@ CREATE TABLE test1(
 INSERT INTO test1(one_field, two_field)
 -- WITH RECURSIVE () : 재귀를 돌면서 () 내에 있는 SELECT 쿼리를 실행한다.
 WITH RECURSIVE my_cte AS (
-	SELECT 	1 AS n,
-			CAST(1 AS DOUBLE) AS abc, 
-            CAST(2 AS DOUBLE) AS se
+    SELECT 1 AS n, CAST(1 AS DOUBLE) AS abc, CAST(2 AS DOUBLE) AS se
     UNION ALL
-    SELECT 	1 + n, 
-			CAST(1 + n AS DOUBLE), 
-            CAST(2 + n AS DOUBLE) 
-	FROM 	my_cte 
-    WHERE 	n < 10000 -- 10000번 재귀 호출
+    SELECT 1 + n, CAST(1 + n AS DOUBLE), CAST(2 + n AS DOUBLE) FROM my_cte WHERE n < 10000 -- 10000번 재귀 호출
 )
 SELECT abc, se FROM my_cte;
 
